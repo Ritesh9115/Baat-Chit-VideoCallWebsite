@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
-import "./Home.css"; // <-- Import the new CSS file
+import "./home.css"; // <-- Import the new CSS file
 
 function Home() {
     const navigate = useNavigate();
