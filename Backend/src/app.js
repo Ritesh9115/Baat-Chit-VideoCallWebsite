@@ -6,8 +6,11 @@ import {Server} from "socket.io";
 import { connectToSocket } from "./controllers/socketManager.js";
 
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 import cors from "cors";
+dotenv.config();
+
 
 const app = express();
 const server = createServer(app);
@@ -22,10 +25,13 @@ app.use("/api/v1/users",userRoutes);
 
 
 const start = async()=>{
-    const connectionDb = await mongoose.connect("mongodb+srv://mkvcinema140_db_user:ritesh22@cluster0.vgg9l5b.mongodb.net/");
+    try{const connectionDb = await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to mongoDb");
     server.listen((app.get("port")),()=>{
         console.log("App is listening...");
-});}
+})}catch(e){
+            console.log(e);
+        }
+        ;}
 
 start();
