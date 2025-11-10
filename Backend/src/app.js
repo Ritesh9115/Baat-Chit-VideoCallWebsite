@@ -10,14 +10,30 @@ import dotenv from "dotenv";
 
 import cors from "cors";
 dotenv.config();
-
-
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://baat-chit-8rq0.onrender.com"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("CORS not allowed"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 const server = createServer(app);
 const io = connectToSocket(server);
 
 app.set("port", (process.env.PORT || 8000));
-app.use(cors());
+// app.use(cors());
 app.use(express.json({limit: "40kb"}));
 app.use(express.urlencoded({limit: "40kb", extended:true}));
 app.use("/api/v1/users",userRoutes);
