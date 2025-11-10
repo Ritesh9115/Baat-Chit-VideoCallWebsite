@@ -23,7 +23,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
-import server from "../envirnment.js";
+import {server} from "../environment.js";
 
 const server_url = server;
 
