@@ -28,7 +28,14 @@ import {server} from "../environment.js";
 const server_url = server;
 
 const peerConfigConnections = {
-    iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+    iceServers: [
+        { urls: "stun:stun.l.google.com:19302" },
+        {
+            urls: "turn:global.relay.metered.ca:80",
+            username: "openai",
+            credential: "openai123"
+        }
+    ],
 };
 
 let connections = {};
